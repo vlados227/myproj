@@ -1,30 +1,16 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+    <header class="bg-primary text-white py-2">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand text-white">Статейка</a>
+
+      <nav class="nav">
+        <router-link to="/"><a class="nav-link text-white">Главная</a></router-link>
+        <router-link to="/all"><a class="nav-link text-white">Все статьи</a></router-link>
+        <router-link to="/manage"><a class="nav-link text-white">Управление статьями</a></router-link>
+      </nav>
+    </div>
+  </header>
   <router-view/>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style src="@/assets/css/bootstrap.min.css"></style>
