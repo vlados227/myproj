@@ -6,7 +6,7 @@
       </div>
 
       <div class="row">
-        <div class="col-3" v-for="article in list.articles">
+        <div class="col-3 mb-3" v-for="article in list.articles">
           <div>
             <div class="card">
               <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">

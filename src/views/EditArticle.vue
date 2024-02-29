@@ -11,11 +11,11 @@
 
         <div class="mb-3">
           <label>Название</label>
-          <input type="text" class="form-control" placeholder="Придумайте название статьи">
+          <input v-model="article.name" type="text" class="form-control" placeholder="Придумайте название статьи">
         </div>
         <div class="mb-3">
           <label>Описание</label>
-          <textarea class="form-control" placeholder="Напишите описание статьи" rows="5"></textarea>
+          <textarea v-model="article.description" class="form-control" placeholder="Напишите описание статьи" rows="5"></textarea>
         </div>
         <div class="mb-4">
           <label>Изображение</label>
@@ -24,7 +24,12 @@
           <img src="@/assets/images/placeholder-blue.png" class="w-100 mt-4" alt="preview">
         </div>
 
-        <button class="btn btn-success">Сохранить</button>
+        <button @click.prevent="$router.push({
+          name: 'id',
+          params:{
+            id: id
+          }
+        })" class="btn btn-success">Сохранить</button>
       </form>
     </section>
   </div>
