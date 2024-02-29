@@ -6,134 +6,52 @@
       </div>
 
       <div class="row">
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">09.04.2021 16:00</small>
-              </p>
+        <div class="col-3" v-for="article in list.articles">
+          <div>
+            <div class="card">
+              <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
+              <div class="card-body">
+                <p class="card-text">
+                  <small class="text-muted">{{ article.date }}</small>
+                </p>
 
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
+                <h5 class="card-title">{{ article.name }}</h5>
+                <p class="card-text">{{article.description}}</p>
 
-              <a href="#" class="btn btn-primary">Читать</a>
+                <a @click="$router.push({
+                  name: 'id',
+                  params: {
+                    id: article.id
+                  }
+                })" class="btn btn-primary">Читать</a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">08.04.2021 16:00</small>
-              </p>
 
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">07.04.2021 16:00</small>
-              </p>
-
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">06.04.2021 16:00</small>
-              </p>
-
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">05.04.2021 16:00</small>
-              </p>
-
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">04.04.2021 16:00</small>
-              </p>
-
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">03.04.2021 16:00</small>
-              </p>
-
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card mb-4">
-            <img class="card-img-top" src="@/assets/images/placeholder-blue.png" alt="placeholder">
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">02.04.2021 16:00</small>
-              </p>
-
-              <h5 class="card-title">Название статьи</h5>
-              <p class="card-text">Описание статьи</p>
-
-              <a href="#" class="btn btn-primary">Читать</a>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
   </div>
 </template>
 
 <script>
+  import articles from '@/assets/js/data.js';
   export default {
-
+    data() {
+      return {
+        list: articles
+      }
+    },
+    methods: {
+      spliceArr(){
+        this.list.articles.sort((a, b) => a.date.localeCompare(b.date));
+        this.list.articles.reverse();
+      }
+    },
+    beforeMount(){
+      this.spliceArr()
+    }
   }
 </script>
 

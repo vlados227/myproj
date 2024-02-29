@@ -7,30 +7,59 @@
       </div>
 
       <table class="table">
-        <tr>
+        <tbody>
+          <tr>
           <th>#</th>
           <th>Название</th>
           <th>Дата и время</th>
           <th>Действия</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Статья 1</td>
-          <td>09.04.2021 16:00</td>
+        <tr v-for="(article, index) in list.articles">
+          <td>{{ index+1 }}</td>
+          <td>{{ article.name }}</td>
+          <td>{{ article.date }}</td>
           <td>
-            <button class="btn btn-primary btn-sm">Редактировать</button>
-            <button class="btn btn-danger btn-sm">Удалить</button>
+            <button @click="$router.push({
+              name: 'edit',
+              params: {
+                id: article.id
+              }
+            })" class="btn btn-primary btn-sm">Редактировать</button>
+            <button @click="list.articles.splice(list.articles.findIndex(item => item.id == article.id) ,1)" class="btn btn-danger btn-sm">Удалить</button>
           </td>
         </tr>
+        </tbody>
+        
       </table>
+
     </section>
   </div>
 </template>
 
 <script>
-  export default {
-    
+import articles from '@/assets/js/data.js';
+//import Article from './Article.vue';
+export default {
+  data() {
+    return {
+      list: articles,
+      list2: [],
+      rArticle: {},
+    }
+  },
+  methods: {
+    spliceArr(){
+      this.list.articles.sort((a, b) => a.date.localeCompare(b.date));
+      this.list.articles.reverse();
+      this.list2 = this.list.articles.slice();
+      this.list2.splice(4);
+      this.rArticle = this.list.articles[Math.floor(Math.random()*this.list.articles.length)]
+    }
+  },
+  beforeMount(){
+    this.spliceArr();
   }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,38 +1,56 @@
 <template>
-<div class="container">
+    <div id="app">
+
+  <div class="container">
     <section class="py-5">
       <div class="mb-4 d-flex justify-content-between align-items-center">
-        <h2>Управление статьями</h2>
-        <button class="btn btn-sm btn-success">Добавить статью</button>
+        <h2>Изменение статьи</h2>
       </div>
 
-      <table class="table">
-        <tr>
-          <th>#</th>
-          <th>Название</th>
-          <th>Дата и время</th>
-          <th>Действия</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Статья 1</td>
-          <td>09.04.2021 16:00</td>
-          <td>
-            <button class="btn btn-primary btn-sm">Редактировать</button>
-            <button class="btn btn-danger btn-sm">Удалить</button>
-          </td>
-        </tr>
-      </table>
+      <form>
+
+        <div class="mb-3">
+          <label>Название</label>
+          <input type="text" class="form-control" placeholder="Придумайте название статьи">
+        </div>
+        <div class="mb-3">
+          <label>Описание</label>
+          <textarea class="form-control" placeholder="Напишите описание статьи" rows="5"></textarea>
+        </div>
+        <div class="mb-4">
+          <label>Изображение</label>
+          <input type="file" class="form-control">
+
+          <img src="@/assets/images/placeholder-blue.png" class="w-100 mt-4" alt="preview">
+        </div>
+
+        <button class="btn btn-success">Сохранить</button>
+      </form>
     </section>
   </div>
+</div>
 </template>
 
 <script>
-  export default {
-    
+import articles from '@/assets/js/data.js'
+export default {
+  data(){
+    return{
+      list: articles,
+      id: this.$route.params.id,
+      article: {}
+    }
+  },
+  methods:{
+    findArt(arr){
+      this.article = arr.find(item => item.id == this.id)
+    }
+  },
+  beforeMount(){
+    this.findArt(this.list.articles)
   }
+}
 </script>
 
-<style lang="scss" scoped>
-
+<style >
 </style>
